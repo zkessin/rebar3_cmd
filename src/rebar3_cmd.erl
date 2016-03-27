@@ -45,12 +45,14 @@ format_error(Reason) ->
 
 
 run_cmd(State) ->
+    io:format("State ~p~n", [State]),
     {Args, _} = rebar_state:command_parsed_args(State),
     case proplists:get_value(cmd, Args) of
         undefined -> ok;
-        X ->
-            io:format("Cmd ~p~n", [X]),
-            eval(X,[])
+        Cmd ->
+            io:format("Cmd ~p~n", [Cmd]),
+            create_service:create_elm_code(),
+            eval(Cmd,[])
             
     end.
 
