@@ -14,7 +14,7 @@
 -spec init(rebar_state:t()) -> {ok, rebar_state:t()}.
 init(State) ->
     Provider = providers:create([
-            {name, 'cmd'},          % The 'user friendly' name of the task
+            {name, 'rebar3_cmd'},          % The 'user friendly' name of the task
             {module, ?MODULE},          % The module implementation of the task
             {bare, true},               % The task can be run by the user, always true
             {deps, []},              % The list of dependencies
