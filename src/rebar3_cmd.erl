@@ -21,7 +21,7 @@ init(State) ->
             {example, "rebar3 build_elm --command 'foo:bar()'"}, % How to use the plugin
             {opts, [
                     {cmd, $c, "command", string, "command to run"}
-                   ]}                  % list of options understood by the plugin
+                   ]},                  % list of options understood by the plugin
             {short_desc, ""},
             {desc, ""}
     ]),
@@ -32,7 +32,7 @@ init(State) ->
 %% and dependencies have been run.
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
-    ok = run_cmd(State)
+    ok = run_cmd(State),
     {ok, State}.
 
 %% When an exception is raised or a value returned as
@@ -50,13 +50,12 @@ run_cmd(State) ->
         undefined -> ok;
         X ->
             io:format("X ~p", [X]),
-            eval(X)
+            eval(X,[])
             
     end.
 
 
-eval(Str) ->
-    eval(Str,Environ) ->
+eval(Str,Environ) ->
     {ok,Scanned,_} = erl_scan:string(Str),
     {ok,Parsed} = erl_parse:parse_exprs(Scanned),
     erl_eval:exprs(Parsed,Environ).
