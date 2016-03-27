@@ -49,7 +49,7 @@ run_cmd(State) ->
     case proplists:get_value(cmd, Args) of
         undefined -> ok;
         X ->
-            io:format("X ~p", [X]),
+            io:format("Cmd ~p~n", [X]),
             eval(X,[])
             
     end.
